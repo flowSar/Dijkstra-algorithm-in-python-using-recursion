@@ -25,7 +25,7 @@ class Graph:
         return self.getSub(node1)[node2]+c
 
     # this function travel all graph and update cost of each node
-    def DFS(self, start, visited):
+    def Dijkstra(self, start, visited):
         visited +=[start]
 
         for child in self.getSub(start):
@@ -33,10 +33,10 @@ class Graph:
 
         for node in self.getSub(start):
             if node not in visited:
-                self.DFS(node,visited)
+                self.Dijkstra(node,visited)
 
     # after we set cost for each node/ver we need this fun to find small dis
-    def DFS_helper(self, start, end, paths, dis = 0):
+    def Dijkstra_helper(self, start, end, paths, dis = 0):
         paths += [start]
         if start == end:
             return paths
@@ -53,7 +53,7 @@ class Graph:
                       
                 """
                 if new_dis  <= self.getCost(node) and new_dis <=self.getCost(end):
-                    self.DFS_helper(node, end, paths, new_dis)
+                    self.Dijkstra_helper(node, end, paths, new_dis)
 
         return paths
 
@@ -79,6 +79,6 @@ if __name__ == "__main__":
     g.addEdge("E", "C",5)
 
 
-    g.DFS("S",[])
+    g.Dijkstra("S",[])
     print(g.cost)
-    print(g.DFS_helper("S","C",[]))
+    print(g.Dijkstra_helper("S","C",[]))
